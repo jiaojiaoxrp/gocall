@@ -52,34 +52,32 @@ class _BottomTabsState extends State<BottomTabs> {
 
       return Scaffold(
         body: pageList[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed, //不加这个文字不显示
-          backgroundColor: Colors.white,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+        bottomNavigationBar: ConvexAppBar(
+          items: [
+            TabItem(
               icon: Icon(Icons.call),
-              label: '通话',
+              title: '通话',
             ),
-            BottomNavigationBarItem(
+            TabItem(
               icon: Icon(Icons.contacts),
-              label: '联系人',
+              title: '联系人',
             ),
-            BottomNavigationBarItem(
+            TabItem(
               icon: Icon(Icons.dialpad),
-              label: '拨号',
+              title: '拨号',
             ),
-            BottomNavigationBarItem(
+            TabItem(
               icon: Icon(Icons.sms),
-              label: '短信',
+              title: '短信',
             ),
-            BottomNavigationBarItem(
+            TabItem(
               icon: Icon(Icons.person),
-              label: '我的',
+              title: '我的',
             ),
           ],
-          currentIndex: currentIndex,
-          selectedItemColor: Color.fromARGB(255, 14, 28, 179),
-          unselectedItemColor: Color.fromARGB(255, 96, 96, 99),
+          initialActiveIndex: currentIndex,
+          height: 50,
+          style: TabStyle.fixedCircle,
           onTap: (int index) {
             Provider.of<RootProvider>(context, listen: false)
                 .changeIndex(index);

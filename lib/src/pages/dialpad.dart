@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dialpad/flutter_dialpad.dart';
 
 class DialPadPage extends StatefulWidget {
   const DialPadPage({super.key});
@@ -24,90 +25,23 @@ class _DialPadPageState extends State<DialPadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          _phoneNumber,
-          style: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(height: 16.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildNumberButton('1'),
-            _buildNumberButton('2'),
-            _buildNumberButton('3'),
-          ],
-        ),
-        SizedBox(height: 16.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildNumberButton('4'),
-            _buildNumberButton('5'),
-            _buildNumberButton('6'),
-          ],
-        ),
-        SizedBox(height: 16.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildNumberButton('7'),
-            _buildNumberButton('8'),
-            _buildNumberButton('9'),
-          ],
-        ),
-        SizedBox(height: 16.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildDeleteButton(),
-            _buildNumberButton('0'),
-            _buildDialButton(),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildNumberButton(String label) {
-    return SizedBox(
-      width: 64.0,
-      height: 64.0,
-      child: ElevatedButton(
-        child: Text(label),
-        onPressed: () {
-          _onNumberPressed(label);
-        },
-      ),
-    );
-  }
-
-  Widget _buildDeleteButton() {
-    return SizedBox(
-      width: 64.0,
-      height: 64.0,
-      child: ElevatedButton(
-        child: Icon(Icons.backspace),
-        onPressed: () {
-          _onDeletePressed();
-        },
-      ),
-    );
-  }
-
-  Widget _buildDialButton() {
-    return SizedBox(
-      width: 64.0,
-      height: 64.0,
-      child: ElevatedButton(
-        child: Icon(Icons.phone),
-        onPressed: () {
-          // Your code here to initiate the call
-        },
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+            child: DialPad(
+                enableDtmf: true,
+                //outputMask: "(000) 000-0000",
+                hideSubtitle: false,
+                backspaceButtonIconColor: Colors.red,
+                buttonTextColor: Colors.white,
+                dialOutputTextColor: Colors.white,
+                keyPressed: (value) {
+                  print('$value was pressed');
+                },
+                makeCall: (number) {
+                  print(number);
+                })),
       ),
     );
   }
